@@ -4,25 +4,22 @@
 const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const axios = require('axios');
-const path = require('path');
+const puppeteer = require('puppeteer-core');
 
-/* =========================
-   INIT BOT (SETELAH REQUIRE)
-========================= */
 const client = new Client({
   authStrategy: new LocalAuth(),
   puppeteer: {
     headless: true,
+    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome',
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
-      '--disable-gpu',
-      '--no-first-run',
-      '--no-zygote'
+      '--disable-gpu'
     ]
   }
 });
+
 
 
 /* =========================
